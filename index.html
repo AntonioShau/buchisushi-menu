@@ -35,6 +35,27 @@
             margin-bottom: 20px;
             animation: float 3s ease-in-out infinite;
         }
+
+        .logo img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #fff;
+            animation: pulseLogo 2.5s ease-in-out infinite;
+        }
+
+        @keyframes pulseLogo {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
         
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
@@ -152,9 +173,11 @@
     <div class="decorative-circle circle2"></div>
     
     <div class="container">
-        <div class="logo">🍣</div>
+        <div class="logo">
+            <img src="images/buchi_sushi_logo.jpg" alt="Sushi Logo" width="200" height="200">
+        </div>
         <h1>Buchi Sushi</h1>
-        <p class="subtitle">El sabor que siempre cae de pie.”</p>
+        <p class="subtitle">El sabor que siempre cae de pie.</p>
         
         <div class="construction-badge">
             🚧 Sitio en Construcción
