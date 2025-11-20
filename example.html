@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buchi Sushi - Menú</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        /* Cabecera */
+        header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Sección de LazyRow */
+        .lazyrow-section {
+            margin-bottom: 3rem;
+        }
+
+        .lazyrow-section h2 {
+            margin-bottom: 1.5rem;
+            color: #ff6b6b;
+            font-size: 1.8rem;
+            padding-left: 0.5rem;
+        }
+
+        .lazyrow {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding: 1rem 0.5rem;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .lazyrow::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        .lazyrow::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .lazyrow::-webkit-scrollbar-thumb {
+            background: #ff6b6b;
+            border-radius: 10px;
+        }
+
+        .lazyrow::-webkit-scrollbar-thumb:hover {
+            background: #ee5a6f;
+        }
+
+        /* Tarjetas de platillos */
+        .dish-card {
+            min-width: 320px;
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dish-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        .dish-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            overflow: hidden;
+        }
+
+        .dish-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .dish-card h3 {
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            color: #ff6b6b;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .dish-card p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .dish-card label {
+            display: block;
+            margin-top: 0.8rem;
+            margin-bottom: 0.3rem;
+            color: #333;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .dish-card select,
+        .dish-card input[type="number"] {
+            width: 100%;
+            padding: 0.6rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .dish-card select:focus,
+        .dish-card input[type="number"]:focus {
+            outline: none;
+            border-color: #ff6b6b;
+        }
+
+        .add-btn {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 1rem;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Formulario de pedido */
+        .form-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 5rem;
+        }
+
+        .form-section h2 {
+            color: #ff6b6b;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff6b6b;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .order-summary {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .order-summary h3 {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid #ff6b6b;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        /* FAB */
+        .fab {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 1000;
+            border: none;
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
+        }
+
+        .fab svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #fff;
+            color: #ff6b6b;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border: 2px solid #ff6b6b;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .dish-card {
+                min-width: 280px;
+            }
+
+            .lazyrow-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .form-section {
+                padding: 1.5rem;
+            }
+
+            .fab {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                width: 55px;
+                height: 55px;
+            }
+        }
+
+        .empty-order {
+            text-align: center;
+            color: #999;
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabecera -->
+    <header>
+        <h1>🍣 Buchi Sushi</h1>
+        <p>Fusión perfecta entre sushi y sabores únicos</p>
+    </header>
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <!-- BOTANAS -->
+        <div class="lazyrow-section">
+            <h2>🍤 Botanas</h2>
+            <div class="lazyrow">
+                <div class="dish-card" data-name="Botana Clásica" data-price="150">
+                    <div class="dish-image">🍗</div>
+                    <h3>Botana Clásica <span class="price">$150</span></h3>
+                    <p>Fajitas de pollo empanizado bañadas en 2 salsas a elegir, crujientes papas a la francesa, aderezo ranch y jalapeño.</p>
+                    <label>Salsa 1</label>
+                    <select class="salsa1">
+                        <option value="">Selecciona</option>
+                        <option>Bufalo</option>
+                        <option>BBQ</option>
+                        <option>BBQ Hot</option>
+                        <option>Mango Habanero</option>
+                        <option>Tamarindo</option>
+                        <option>Naranja chipotle</option>
+                    </select>
+                    <label>Salsa 2</label>
+                    <select class="salsa2">
+                        <option value="">Selecciona</option>
+                        <option>Bufalo</option>
+                        <option>BBQ</option>
+                        <option>BBQ Hot</option>
+                        <option>Mango Habanero</option>
+                        <option>Tamarindo</option>
+                        <option>Naranja chipotle</option>
+                    </select>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Botana Completa" data-price="165">
+                    <div class="dish-image">🍟</div>
+                    <h3>Botana Completa <span class="price">$165</span></h3>
+                    <p>Fajitas de pollo empanizado bañadas en 2 salsas a elegir, crujientes papas a la francesa, aros de cebolla y aderezo.</p>
+                    <label>Salsa 1</label>
+                    <select class="salsa1">
+                        <option value="">Selecciona</option>
+                        <option>Bufalo</option>
+                        <option>BBQ</option>
+                        <option>BBQ Hot</option>
+                        <option>Mango Habanero</option>
+                    </select>
+                    <label>Salsa 2</label>
+                    <select class="salsa2">
+                        <option value="">Selecciona</option>
+                        <option>Bufalo</option>
+                        <option>BBQ</option>
+                        <option>BBQ Hot</option>
+                        <option>Mango Habanero</option>
+                    </select>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Para Compartir" data-price="260">
+                    <div class="dish-image">🎉</div>
+                    <h3>Para Compartir <span class="price">$260</span></h3>
+                    <p>Combo grande de fajitas de pollo empanizado bañadas en 2 salsas a elegir, rollo completo, aros de cebolla y papas.</p>
+                    <label>Salsa 1</label>
+                    <select class="salsa1">
+                        <option value="">Selecciona</option>
+                        <option>Bufalo</option>
+                        <option>BBQ</option>
+                        <option>Sriracha</option>
+                        <option>Pimienta Limón</option>
+                    </select>
+                    <label>Salsa 2</label>
+                    <select class="salsa2">
+                        <option value="">Selecciona</option>
+                        <option>Bufalo</option>
+                        <option>BBQ</option>
+                        <option>Sriracha</option>
+                        <option>Pimienta Limón</option>
+                    </select>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ROLLOS -->
+        <div class="lazyrow-section">
+            <h2>🍣 Rollos Calientes</h2>
+            <div class="lazyrow">
+                <div class="dish-card" data-name="Buchi Roll" data-price="115">
+                    <div class="dish-image">
+                        <img src="images/buchi_roll.jpg" alt="Buchi Roll">
+                    </div>
+                    <h3>Buchi Roll <span class="price">$115</span></h3>
+                    <p>Rollo empanizado con relleno de camarón, surimi, pepino, aguacate y queso crema.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="ChickenMaki" data-price="115">
+                    <div class="dish-image">
+                        <img src="images/chicken_maki.jpg" alt="ChickenMaki">
+                    </div>
+                    <h3>ChickenMaki <span class="price">$115</span></h3>
+                    <p>Rollo empanizado relleno de pollo, pepino, aguacate y queso crema.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="CachuRoll" data-price="130">
+                    <div class="dish-image">
+                        <img src="images/cachu_roll.jpg" alt="CachuRoll">
+                    </div>
+                    <h3>CachuRoll <span class="price">$130</span></h3>
+                    <p>Rollo empanizado y cubierto con Flamin'Hot con relleno de camarón, surimi, queso crema, pepino y aguacate bañado en queso chihuahua.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="CocoRoll" data-price="125">
+                    <div class="dish-image">
+                        <img src="images/coco_roll.jpg" alt="CocoRoll">
+                    </div>
+                    <h3>CocoRoll <span class="price">$125</span></h3>
+                    <p>Rollo empanizado de coco rallado, relleno de camarón, aguacate y queso crema, coronado con tampico y bañado en salsa anguila</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="TampicoRoll" data-price="120">
+                    <div class="dish-image">
+                        <img src="images/tampico_roll.jpg" alt="TampicoRoll">
+                    </div>
+                    <h3>TampicoRoll <span class="price">$120</span></h3>
+                    <p>Rollo empanizado relleno de salsa tampico, aguacate y pepino, bañado en salsita chipotle.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="lazyrow-section">
+            <h2>🍣 Rollos Fríos</h2>
+            <div class="lazyrow">
+                <div class="dish-card" data-name="YuyuRoll" data-price="115">
+                    <div class="dish-image">
+                        <img src="images/yuyu_roll.jpg" alt="Yuyu">
+                    </div>
+                    <h3>Yuyu Roll <span class="price">$115</span></h3>
+                    <p>Rollo de camarón, surimi, aguacate, pepino y queso crema, bañado en ajonjolí negro.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="AguacateRoll" data-price="120">
+                    <div class="dish-image">
+                        <img src="images/aguacate_roll.jpg" alt="AguacateRoll">
+                    </div>
+                    <h3>AguacateRoll<span class="price">$120</span></h3>
+                    <p>Relleno de camarón, pepino y queso crema, arropado en laminas de aguacate y espolvoreado con ajonjolí negro.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="NevadoRoll" data-price="120">
+                    <div class="dish-image">
+                        <img src="images/nevado_roll.jpg" alt="NevadoRoll">
+                    </div>
+                    <h3>NevadoRoll <span class="price">$120</span></h3>
+                    <p>Relleno de surimi, pepino y aguacate, arropado en queso crema y espolvoreado con ajonjolí negro.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="NoriMaki" data-price="110">
+                    <div class="dish-image">
+                        <img src="images/nori_maki.jpg" alt="NoriMaki">
+                    </div>
+                    <h3>NoriMaki <span class="price">$110</span></h3>
+                    <p>Relleno de camarón o pollo a elegir, aguacate y queso crema, nori por fuera.</p>
+                    <label>Salsa 1</label>
+                    <select class="relleno">
+                        <option value="">Selecciona</option>
+                        <option>Camarón</option>
+                        <option>Pollo</option>
+                    </select>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CHAROLAS -->
+        <div class="lazyrow-section">
+            <h2>🍽️ Charolas Especiales</h2>
+            <div class="lazyrow">
+                <div class="dish-card" data-name="Oriental Mini" data-price="280">
+                    <div class="dish-image">🥡</div>
+                    <h3>Oriental Mini <span class="price">$280</span></h3>
+                    <p>1 BuchiRoll, 1 NoriMaki, 1 porción de arroz frito, 1 orden de ensalada de pepino y 2 bolitas de salsa tampico.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Estuche" data-price="340">
+                    <div class="dish-image">📦</div>
+                    <h3>Estuche <span class="price">$340</span></h3>
+                    <p>1 BuchiRoll, 1 YuyuRoll, fajitas de pollo empanizadas bañadas en 2 salsas de tu preferencia, papas y aderezos.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Yuyu" data-price="580">
+                    <div class="dish-image">🌟</div>
+                    <h3>Yuyu <span class="price">$580</span></h3>
+                    <p>YuyuRoll, NevadoRoll, 2 BuchiRoll, arroz frito con camarón, ensalada de pepino y 5 bolitas de salsa tampico.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Big Shau" data-price="750">
+                    <div class="dish-image">👑</div>
+                    <h3>Big Shau <span class="price">$750</span></h3>
+                    <p>4 hamburguesas clásicas, pollo empanizado bañado en 2 salsas, papas a la francesa y aderezos.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORMULARIO DE PEDIDO -->
+        <div class="form-section" id="formulario">
+            <h2>🛒 Resumen de Pedido</h2>
+            
+            <div class="order-summary" id="orderSummary">
+                <h3>Tu Pedido:</h3>
+                <div id="orderItems">
+                    <p class="empty-order">No hay productos agregados</p>
+                </div>
+                <div class="order-total" id="orderTotal" style="display: none;">
+                    <span>Total:</span>
+                    <span id="totalAmount">$0</span>
+                </div>
+            </div>
+
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre completo *</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono *</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+                <div class="form-group">
+                    <label for="direccion">Dirección de entrega *</label>
+                    <input type="text" id="direccion" name="direccion" required>
+                </div>
+                <div class="form-group">
+                    <label for="comentarios">Comentarios adicionales</label>
+                    <textarea id="comentarios" name="comentarios" placeholder="Ej: Sin cebolla, extra picante, etc."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Realizar Pedido</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FAB -->
+    <button class="fab" id="fabButton" title="Ver carrito">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+        </svg>
+        <span class="cart-badge" id="cartBadge" style="display: none;">0</span>
+    </button>
+
+    <script>
+        let orderItems = [];
+
+        // Agregar al pedido
+        document.querySelectorAll('.add-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const card = this.closest('.dish-card');
+                const name = card.dataset.name;
+                const price = parseInt(card.dataset.price);
+                const qty = parseInt(card.querySelector('.qty').value);
+                
+                const salsa1Select = card.querySelector('.salsa1');
+                const salsa2Select = card.querySelector('.salsa2');
+
+                const rellenoSelect = card.querySelector('.relleno');
+                
+                let salsa1 = '';
+                let salsa2 = '';
+                let relleno = '';
+                
+                if (salsa1Select) {
+                    salsa1 = salsa1Select.value;
+                    if (!salsa1 && salsa1Select.options.length > 1) {
+                        alert('Por favor selecciona la Salsa 1');
+                        return;
+                    }
+                }
+                
+                if (salsa2Select) {
+                    salsa2 = salsa2Select.value;
+                    if (!salsa2 && salsa2Select.options.length > 1) {
+                        alert('Por favor selecciona la Salsa 2');
+                        return;
+                    }
+                }
+
+                if (rellenoSelect) {
+                    relleno = rellenoSelect.value;
+                    if (!relleno && rellenoSelect.options.length > 1) {
+                        alert('Por favor selecciona el Relleno');
+                        return;
+                    }
+                }
+                
+                const item = {
+                    name,
+                    price,
+                    qty,
+                    salsa1,
+                    salsa2,
+                    relleno,
+                    subtotal: price * qty
+                };
+                
+                orderItems.push(item);
+                updateOrderSummary();
+                
+                // Animación de confirmación
+                this.textContent = '✓ Agregado';
+                setTimeout(() => {
+                    this.textContent = 'Agregar al Pedido';
+                }, 1500);
+            });
+        });
+
+        function updateOrderSummary() {
+            const orderItemsDiv = document.getElementById('orderItems');
+            const totalDiv = document.getElementById('orderTotal');
+            const totalAmountSpan = document.getElementById('totalAmount');
+            const cartBadge = document.getElementById('cartBadge');
+            
+            if (orderItems.length === 0) {
+                orderItemsDiv.innerHTML = '<p class="empty-order">No hay productos agregados</p>';
+                totalDiv.style.display = 'none';
+                cartBadge.style.display = 'none';
+                return;
+            }
+            
+            let html = '';
+            let total = 0;
+            
+            orderItems.forEach((item, index) => {
+                html += `
+                    <div class="order-item">
+                        <div>
+                            <strong>${item.name}</strong> x${item.qty}
+                            ${item.salsa1 ? `<br><small>Salsa 1: ${item.salsa1}</small>` : ''}
+                            ${item.salsa2 ? `<br><small>Salsa 2: ${item.salsa2}</small>` : ''}
+                            ${item.relleno ? `<br><small>Relleno: ${item.relleno}</small>` : ''}
+                        </div>
+                        <div>$${item.subtotal}</div>
+                    </div>
+                `;
+                total += item.subtotal;
+            });
+            
+            orderItemsDiv.innerHTML = html;
+            totalAmountSpan.textContent = '$' + total;
+            totalDiv.style.display = 'flex';
+            
+            cartBadge.textContent = orderItems.length;
+            cartBadge.style.display = 'flex';
+        }
+
+        // FAB - Scroll al formulario
+        document.getElementById('fabButton').addEventListener('click', function() {
+            document.getElementById('formulario').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+
+        // Envío del formulario
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (orderItems.length === 0) {
+                alert('Por favor agrega productos a tu pedido primero');
+                return;
+            }
+            
+            const nombre = document.getElementById('nombre').value;
+            const telefono = document.getElementById('telefono').value;
+            const direccion = document.getElementById('direccion').value;
+            const comentarios = document.getElementById('comentarios').value;
+            
+            let pedidoTexto = `*NUEVO PEDIDO*\n\n`;
+            pedidoTexto += `👤 Cliente: ${nombre}\n`;
+            pedidoTexto += `📞 Teléfono: ${telefono}\n`;
+            pedidoTexto += `📍 Dirección: ${direccion}\n\n`;
+            pedidoTexto += `*PRODUCTOS:*\n`;
+            
+            let total = 0;
+            orderItems.forEach(item => {
+                pedidoTexto += `\n• ${item.name} x${item.qty} - $${item.subtotal}\n`;
+                if (item.salsa1) pedidoTexto += `  Salsa 1: ${item.salsa1}\n`;
+                if (item.salsa2) pedidoTexto += `  Salsa 2: ${item.salsa2}\n`;
+                if (item.relleno) pedidoTexto += `  Relleno: ${item.relleno}\n`;
+                total += item.subtotal;
+            });
+            
+            pedidoTexto += `\n*TOTAL: $${total}*`;
+            
+            if (comentarios) {
+                pedidoTexto += `\n\n💬 Comentarios: ${comentarios}`;
+            }
+            
+            alert(`¡Gracias por tu pedido, ${nombre}!\n\nTotal: $${total}\n\nEn un momento nos pondremos en contacto contigo.`);
+            
+            console.log(pedidoTexto);
+            
+            // Limpiar
+            this.reset();
+            orderItems = [];
+            updateOrderSummary();
+        });
+    </script>
+</body>
+</html>
