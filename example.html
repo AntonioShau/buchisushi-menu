@@ -609,35 +609,95 @@
 
         </div>
 
-        <!-- BOTANAS -->
+        <!-- Hamburguesas -->
         <div class="lazyrow-section">
-            <h2>🍤 Botanas</h2>
+            <h2>🍔 Hamburguesas</h2>
             <div class="lazyrow">
-                <div class="dish-card" data-name="Botana Clásica" data-price="150">
-                    <div class="dish-image">🍗</div>
-                    <h3>Botana Clásica <span class="price">$150</span></h3>
-                    <p>Fajitas de pollo empanizado bañadas en 2 salsas a elegir, crujientes papas a la francesa,
-                        aderezo
-                        ranch y jalapeño.</p>
-                    <label>Salsa 1</label>
+                <div class="dish-card" data-name="Clásica Burger" data-price="110">
+                    <div class="dish-image">
+                        <img src="images/clasica_burger.jpg" alt="Clasica Burger">
+                    </div>
+                    <h3>Clasica Burger <span class="price">$110</span></h3>
+                    <p>Jugosa carne de res a la plancha, acompañada de crujiente lechuga, rodajas de tomate, cebolla
+                        morada, aguacate, jamón y queso aarillo. Incluye papas.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Doble Burger Shau" data-price="140">
+                    <div class="dish-image">
+                        <img src="images/doble_burger_shau.jpg" alt="Doble Burger Shau">
+                    </div>
+                    <h3>Doble Burger Shau <span class="price">$140</span></h3>
+                    <p>Dos jugosas carnes de res bañadas en salsita BBQ, acompañada de crujiente lechuga, rodajas de
+                        tomate, aguacate, aritos de cebolla empanizados, jamón y queso amarillo. Incluye papas.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Crujipollo" data-price="130">
+                    <div class="dish-image">
+                        <img src="images/crujipollo.jpg" alt="Crujipollo">
+                    </div>
+                    <h3>Crujipollo <span class="price">$130</span></h3>
+                    <p>Fajitas de pollo empaniado bañadas en salsa de tu elección (BBQ, Búfalo, o Mango Habanero), con
+                        lechuga fresca, tomate, cebolla morada, jamón y queso amarillo. Incluye papas.</p>
+                    <label>Salsa</label>
                     <select class="salsa1">
                         <option value="">Selecciona</option>
                         <option>Bufalo</option>
                         <option>BBQ</option>
-                        <option>BBQ Hot</option>
                         <option>Mango Habanero</option>
-                        <option>Tamarindo</option>
-                        <option>Naranja chipotle</option>
+                    </select>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTANAS -->
+        <div class="lazyrow-section">
+            <h2>🔥 Botanas</h2>
+            <div class="lazyrow">
+                <div class="dish-card" data-name="Botana Clásica" data-price="150">
+                    <div class="dish-image">
+                        <img src="images/botana_clasica.jpg" alt="Botana Clasica">
+                    </div>
+                    <h3>Botana Clásica <span class="price">$150</span></h3>
+                    <p>Fajitas de pollo empaniado bañadas en 2 salsas a elegir, crujientes papas a la francesa, aderezo
+                        ranch y jalapeño.</p>
+                    <label>Salsa 1</label>
+                    <select class="salsa1">
+                        <option value="">Selecciona</option>
+                        <option>BAUFALO</option>
+                        <option>BBQ</option>
+                        <option>BBQ HOT</option>
+                        <option>TAMARINDO</option>
+                        <option>NARANJA CHIPOTLE</option>
+                        <option>SIRACHA</option>
+                        <option>PIMIENTA LIMON</option>
+                        <option>MANGO HABANERO</option>
+                        <option>RANCH</option>
+                        <option>RANCH JALAPEÑO</option>
+                        <option>SALSA DE CHIPOTLE</option>
                     </select>
                     <label>Salsa 2</label>
                     <select class="salsa2">
                         <option value="">Selecciona</option>
-                        <option>Bufalo</option>
+                        <option>BUFALO</option>
                         <option>BBQ</option>
-                        <option>BBQ Hot</option>
-                        <option>Mango Habanero</option>
-                        <option>Tamarindo</option>
-                        <option>Naranja chipotle</option>
+                        <option>BBQ HOT</option>
+                        <option>TAMARINDO</option>
+                        <option>NARANJA CHIPOTLE</option>
+                        <option>SIRACHA</option>
+                        <option>PIMIENTA LIMON</option>
+                        <option>MANGO HABANERO</option>
+                        <option>RANCH</option>
+                        <option>RANCH JALAPEÑO</option>
+                        <option>SALSA DE CHIPOTLE</option>
                     </select>
                     <label>Cantidad</label>
                     <input type="number" class="qty" value="1" min="1">
@@ -645,26 +705,129 @@
                 </div>
 
                 <div class="dish-card" data-name="Botana Completa" data-price="165">
-                    <div class="dish-image">🍟</div>
+                    <div class="dish-image">
+                        <img src="images/botana_completa.jpg" alt="Botana Completa">
+                    </div>
                     <h3>Botana Completa <span class="price">$165</span></h3>
-                    <p>Fajitas de pollo empanizado bañadas en 2 salsas a elegir, crujientes papas a la francesa,
-                        aros de
-                        cebolla y aderezo.</p>
+                    <p>Fajitas de pollo empaniado bañadas en 2 salsas a elegir, crujientes papas a la francesa, dos aros
+                        de cebolla, un dedo de queso, aderezo
+                        ranch y jalapeño.</p>
                     <label>Salsa 1</label>
                     <select class="salsa1">
                         <option value="">Selecciona</option>
-                        <option>Bufalo</option>
+                        <option>BAUFALO</option>
                         <option>BBQ</option>
-                        <option>BBQ Hot</option>
-                        <option>Mango Habanero</option>
+                        <option>BBQ HOT</option>
+                        <option>TAMARINDO</option>
+                        <option>NARANJA CHIPOTLE</option>
+                        <option>SIRACHA</option>
+                        <option>PIMIENTA LIMON</option>
+                        <option>MANGO HABANERO</option>
+                        <option>RANCH</option>
+                        <option>RANCH JALAPEÑO</option>
+                        <option>SALSA DE CHIPOTLE</option>
                     </select>
                     <label>Salsa 2</label>
                     <select class="salsa2">
                         <option value="">Selecciona</option>
-                        <option>Bufalo</option>
+                        <option>BUFALO</option>
                         <option>BBQ</option>
-                        <option>BBQ Hot</option>
-                        <option>Mango Habanero</option>
+                        <option>BBQ HOT</option>
+                        <option>TAMARINDO</option>
+                        <option>NARANJA CHIPOTLE</option>
+                        <option>SIRACHA</option>
+                        <option>PIMIENTA LIMON</option>
+                        <option>MANGO HABANERO</option>
+                        <option>RANCH</option>
+                        <option>RANCH JALAPEÑO</option>
+                        <option>SALSA DE CHIPOTLE</option>
+                    </select>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Botana Especial 1" data-price="210">
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Botana Especial 1">
+                    </div>
+                    <h3>Botana Especial 1 <span class="price">$210</span></h3>
+                    <p>Fajitas de pollo empaniado bañadas en 2 salsas a elegir, crujientes papas a la francesa, dos mini
+                        banderillas de salchicha, dos aros de cebolla, un dedo de queso, aderezo
+                        ranch y jalapeño.</p>
+                    <label>Salsa 1</label>
+                    <select class="salsa1">
+                        <option value="">Selecciona</option>
+                        <option>BAUFALO</option>
+                        <option>BBQ</option>
+                        <option>BBQ HOT</option>
+                        <option>TAMARINDO</option>
+                        <option>NARANJA CHIPOTLE</option>
+                        <option>SIRACHA</option>
+                        <option>PIMIENTA LIMON</option>
+                        <option>MANGO HABANERO</option>
+                        <option>RANCH</option>
+                        <option>RANCH JALAPEÑO</option>
+                        <option>SALSA DE CHIPOTLE</option>
+                    </select>
+                    <label>Salsa 2</label>
+                    <select class="salsa2">
+                        <option value="">Selecciona</option>
+                        <option>BUFALO</option>
+                        <option>BBQ</option>
+                        <option>BBQ HOT</option>
+                        <option>TAMARINDO</option>
+                        <option>NARANJA CHIPOTLE</option>
+                        <option>SIRACHA</option>
+                        <option>PIMIENTA LIMON</option>
+                        <option>MANGO HABANERO</option>
+                        <option>RANCH</option>
+                        <option>RANCH JALAPEÑO</option>
+                        <option>SALSA DE CHIPOTLE</option>
+                    </select>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Botana Especial 2" data-price="215">
+                    <div class="dish-image">
+                        <img src="images/botana_especial_2.jpg" alt="Botana Especial 2">
+                    </div>
+                    <h3>Botana Especial 2 <span class="price">$215</span></h3>
+                    <p>Fajitas de pollo empaniado bañadas en 2 salsas a elegir, crujientes papas a la francesa, medio
+                        Buchi Roll, dos aros
+                        de cebolla, un dedo de queso, aderezo
+                        ranch y jalapeño.</p>
+                    <label>Salsa 1</label>
+                    <select class="salsa1">
+                        <option value="">Selecciona</option>
+                        <option>BAUFALO</option>
+                        <option>BBQ</option>
+                        <option>BBQ HOT</option>
+                        <option>TAMARINDO</option>
+                        <option>NARANJA CHIPOTLE</option>
+                        <option>SIRACHA</option>
+                        <option>PIMIENTA LIMON</option>
+                        <option>MANGO HABANERO</option>
+                        <option>RANCH</option>
+                        <option>RANCH JALAPEÑO</option>
+                        <option>SALSA DE CHIPOTLE</option>
+                    </select>
+                    <label>Salsa 2</label>
+                    <select class="salsa2">
+                        <option value="">Selecciona</option>
+                        <option>BUFALO</option>
+                        <option>BBQ</option>
+                        <option>BBQ HOT</option>
+                        <option>TAMARINDO</option>
+                        <option>NARANJA CHIPOTLE</option>
+                        <option>SIRACHA</option>
+                        <option>PIMIENTA LIMON</option>
+                        <option>MANGO HABANERO</option>
+                        <option>RANCH</option>
+                        <option>RANCH JALAPEÑO</option>
+                        <option>SALSA DE CHIPOTLE</option>
                     </select>
                     <label>Cantidad</label>
                     <input type="number" class="qty" value="1" min="1">
@@ -672,31 +835,90 @@
                 </div>
 
                 <div class="dish-card" data-name="Para Compartir" data-price="260">
-                    <div class="dish-image">🎉</div>
+                    <div class="dish-image">
+                        <img src="images/para_compartir.jpg" alt="Para Compartir">
+                    </div>
                     <h3>Para Compartir <span class="price">$260</span></h3>
-                    <p>Combo grande de fajitas de pollo empanizado bañadas en 2 salsas a elegir, rollo completo,
-                        aros de
-                        cebolla y papas.</p>
+                    <p>Fajitas de pollo empaniado bañadas en 2 salsas a elegir, crujientes papas a la francesa,un rollo
+                        completo Buchi Roll, dos aros
+                        de cebolla, un dedo de queso, aderezo
+                        ranch y jalapeño.</p>
                     <label>Salsa 1</label>
                     <select class="salsa1">
                         <option value="">Selecciona</option>
-                        <option>Bufalo</option>
+                        <option>BAUFALO</option>
                         <option>BBQ</option>
-                        <option>Sriracha</option>
-                        <option>Pimienta Limón</option>
+                        <option>BBQ HOT</option>
+                        <option>TAMARINDO</option>
+                        <option>NARANJA CHIPOTLE</option>
+                        <option>SIRACHA</option>
+                        <option>PIMIENTA LIMON</option>
+                        <option>MANGO HABANERO</option>
+                        <option>RANCH</option>
+                        <option>RANCH JALAPEÑO</option>
+                        <option>SALSA DE CHIPOTLE</option>
                     </select>
                     <label>Salsa 2</label>
                     <select class="salsa2">
                         <option value="">Selecciona</option>
-                        <option>Bufalo</option>
+                        <option>BUFALO</option>
                         <option>BBQ</option>
-                        <option>Sriracha</option>
-                        <option>Pimienta Limón</option>
+                        <option>BBQ HOT</option>
+                        <option>TAMARINDO</option>
+                        <option>NARANJA CHIPOTLE</option>
+                        <option>SIRACHA</option>
+                        <option>PIMIENTA LIMON</option>
+                        <option>MANGO HABANERO</option>
+                        <option>RANCH</option>
+                        <option>RANCH JALAPEÑO</option>
+                        <option>SALSA DE CHIPOTLE</option>
                     </select>
                     <label>Cantidad</label>
                     <input type="number" class="qty" value="1" min="1">
                     <button class="add-btn">Agregar al Pedido</button>
                 </div>
+
+                <div class="dish-card" data-name="Botana Peques" data-price="80">
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Botana Peques">
+                    </div>
+                    <h3>Botana Peques <span class="price">$80</span></h3>
+                    <p>Porcion de fajitas de pollo empanizado, papas a la francesa y aderezo ranch.</p>
+                    <label>Salsa 1</label>
+                    <select class="salsa1">
+                        <option value="">Selecciona</option>
+                        <option>BAUFALO</option>
+                        <option>BBQ</option>
+                        <option>BBQ HOT</option>
+                        <option>TAMARINDO</option>
+                        <option>NARANJA CHIPOTLE</option>
+                        <option>SIRACHA</option>
+                        <option>PIMIENTA LIMON</option>
+                        <option>MANGO HABANERO</option>
+                        <option>RANCH</option>
+                        <option>RANCH JALAPEÑO</option>
+                        <option>SALSA DE CHIPOTLE</option>
+                    </select>
+                    <label>Salsa 2</label>
+                    <select class="salsa2">
+                        <option value="">Selecciona</option>
+                        <option>BUFALO</option>
+                        <option>BBQ</option>
+                        <option>BBQ HOT</option>
+                        <option>TAMARINDO</option>
+                        <option>NARANJA CHIPOTLE</option>
+                        <option>SIRACHA</option>
+                        <option>PIMIENTA LIMON</option>
+                        <option>MANGO HABANERO</option>
+                        <option>RANCH</option>
+                        <option>RANCH JALAPEÑO</option>
+                        <option>SALSA DE CHIPOTLE</option>
+                    </select>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
             </div>
         </div>
 
