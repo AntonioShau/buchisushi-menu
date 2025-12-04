@@ -329,6 +329,56 @@
             border: 2px solid #ff6b6b;
         }
 
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            display: none;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            background-color: #ccc;
+            border-radius: 34px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            transition: .3s;
+        }
+
+        .slider::before {
+            content: "";
+            position: absolute;
+            height: 18px;
+            width: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: .3s;
+        }
+
+        input:checked+.slider {
+            background-color: #4CAF50;
+        }
+
+        input:checked+.slider::before {
+            transform: translateX(26px);
+        }
+
+
         /* Responsive */
         @media (max-width: 768px) {
             header h1 {
@@ -1365,7 +1415,8 @@
                     </div>
                     <h3>Big Shau <span class="price">$750</span></h3>
                     <p>4 Hamburguesas clásicas, pollo empaniado bañado en 2 salsas, 6 alitas bañadas en 1 salsa, papas a
-                        la francesa bañadas en queso amarillo, 3 banderillas de salchicha, 5 aros de cebolla, 3 dedos de queso y aderezos.</p>
+                        la francesa bañadas en queso amarillo, 3 banderillas de salchicha, 5 aros de cebolla, 3 dedos de
+                        queso y aderezos.</p>
                     <label>Salsa 1</label>
                     <select class="salsa1">
                         <option value="">Selecciona</option>
@@ -1396,6 +1447,345 @@
                         <option>RANCH JALAPEÑO</option>
                         <option>SALSA DE CHIPOTLE</option>
                     </select>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!--COMPLEMENTOS-->
+        <div class="lazyrow-section">
+            <h2>Complementos</h2>
+            <div class="lazyrow">
+                <div class="dish-card" data-name="Papa Nachos" data-price="70">
+                    <div class="dish-image">
+                        <img src="images/papa_nachos.jpg" alt="Papa Nachos">
+                    </div>
+                    <h3>Papa Nachos<span class="price">$70</span></h3>
+                    <p>Orden de papas con queso y una porcion de jalapeño.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Papas a la francesa" data-price-orden="50" data-price-porcion="25">
+
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Papas a la francesa">
+                    </div>
+                    <h3>Papas a la francesa </h3>
+                    <p>Elige presentación: orden completa o porción</p>
+
+                    <!-- Toggle Orden/Porción -->
+                    <div class="toggle-container">
+                        <span>Porción $25</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="toggle-type">
+                            <span class="slider"></span>
+                        </label>
+                        <span>Orden $50</span>
+                    </div>
+
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Arroz frito con verduras" data-price-orden="50"
+                    data-price-porcion="20">
+
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Arroz frito con verduras">
+                    </div>
+
+                    <h3>Arroz frito con verduras</h3>
+
+                    <p>Elige presentación: orden completa o porción</p>
+
+                    <!-- Toggle Orden/Porción -->
+                    <div class="toggle-container">
+                        <span>Porción $20</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="toggle-type">
+                            <span class="slider"></span>
+                        </label>
+                        <span>Orden $50</span>
+                    </div>
+
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Arroz frito con verduras y camarones" data-price-orden="75"
+                    data-price-porcion="30">
+
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Arroz frito con verduras y camarones">
+                    </div>
+
+                    <h3>Arroz frito con verduras y camarones </h3>
+
+                    <p>Elige presentación: orden completa o porción</p>
+
+                    <!-- Toggle Orden/Porción -->
+                    <div class="toggle-container">
+                        <span>Porción $30</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="toggle-type">
+                            <span class="slider"></span>
+                        </label>
+                        <span>Orden $75</span>
+                    </div>
+
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Sunomono (Ensalada de pepino)" data-price-orden="50"
+                    data-price-porcion="20" data-price="">
+
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Sunomono (Ensalada de pepino)">
+                    </div>
+
+                    <h3>Sunomono (Ensalada de pepino)</span></h3>
+
+                    <p>Elige presentación: orden completa o porción</p>
+
+                    <!-- Toggle Orden/Porción -->
+                    <div class="toggle-container">
+                        <span>Porción $20</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="toggle-type">
+                            <span class="slider"></span>
+                        </label>
+                        <span>Orden $50</span>
+                    </div>
+
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Dedos de queso" data-price-orden="90"
+                    data-price-porcion="20" data-price="">
+
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Dedos de queso">
+                    </div>
+
+                    <h3>Dedos de queso</span></h3>
+
+                    <p>Elige presentación: orden completa o porción</p>
+
+                    <!-- Toggle Orden/Porción -->
+                    <div class="toggle-container">
+                        <span>Porción $20 c/u</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="toggle-type">
+                            <span class="slider"></span>
+                        </label>
+                        <span>Orden $50 c/6</span>
+                    </div>
+
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Aros de cebolla" data-price-orden="65"
+                    data-price-porcion="12" data-price="">
+
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Aros de cebolla">
+                    </div>
+
+                    <h3>Aros de cebolla</span></h3>
+
+                    <p>Elige presentación: orden completa o porción</p>
+
+                    <!-- Toggle Orden/Porción -->
+                    <div class="toggle-container">
+                        <span>Porción $12 c/u</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="toggle-type">
+                            <span class="slider"></span>
+                        </label>
+                        <span>Orden $65 c/8</span>
+                    </div>
+
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Salsa Tampico" data-price="15">
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Salsa Tampico">
+                    </div>
+                    <h3>Salsa Tampico<span class="price">$15</span></h3>
+                    <p>Bolita de salsa Tampico.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!--SALSAS Y ADEREZOS-->
+        <div class="lazyrow-section">
+            <h2>Salsas y Aderezos</h2>
+
+            <div class="lazyrow">
+                <div class="dish-card" data-name="Bufalo" data-price="15">
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Bufalo">
+                    </div>
+                    <h3>Bufalo<span class="price">$15</span></h3>
+                    <p>Porcion de salsa Bufalo.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="BBQ" data-price="15">
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="BBQ">
+                    </div>
+                    <h3>BBQ<span class="price">$15</span></h3>
+                    <p>Porcion de salsa BBQ.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="BBQ HOT" data-price="15">
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="BBQ HOT">
+                    </div>
+                    <h3>BBQ HOT<span class="price">$15</span></h3>
+                    <p>Porcion de salsa BBQ HOT.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Mango Habanero" data-price="15">
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Mango Habanero">
+                    </div>
+                    <h3>Mango Habanero<span class="price">$15</span></h3>
+                    <p>Porcion de salsa Mango Habanero.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Tamarindo" data-price="15">
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Tamarindo">
+                    </div>
+                    <h3>Tamarindo<span class="price">$15</span></h3>
+                    <p>Porcion de salsa Tamarindo.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Naranja Chipotle" data-price="15">
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Naranja Chipotle">
+                    </div>
+                    <h3>Naranja Chipotle<span class="price">$15</span></h3>
+                    <p>Porcion de salsa Naranja Chipotle.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Siracha" data-price="15">
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Siracha">
+                    </div>
+                    <h3>Siracha<span class="price">$15</span></h3>
+                    <p>Porcion de salsa Siracha.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Pimienta Limon" data-price="15">
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Pimienta Limon">
+                    </div>
+                    <h3>Pimienta Limon<span class="price">$15</span></h3>
+                    <p>Porcion de salsa Pimienta Limon.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Soya Jalapeño" data-price="15">
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Soya Jalapeño">
+                    </div>
+                    <h3>Soya Jalapeño<span class="price">$15</span></h3>
+                    <p>Porcion de salsa Soya Jalapeño.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Anguila" data-price="15">
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Anguila">
+                    </div>
+                    <h3>Anguila<span class="price">$15</span></h3>
+                    <p>Porcion de salsa de Anguila.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Ranch" data-price="15">
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Ranch">
+                    </div>
+                    <h3>Ranch<span class="price">$15</span></h3>
+                    <p>Porcion de aderezo Ranch.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Ranch Jalapeño" data-price="15">
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Ranch Jalapeño">
+                    </div>
+                    <h3>Ranch Jalapeño<span class="price">$15</span></h3>
+                    <p>Porcion de aderezo Ranch Jalapeño.</p>
+                    <label>Cantidad</label>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="add-btn">Agregar al Pedido</button>
+                </div>
+
+                <div class="dish-card" data-name="Chipotle" data-price="15">
+                    <div class="dish-image">
+                        <img src="images/coming-soon.png" alt="Chipotle">
+                    </div>
+                    <h3>Chipotle<span class="price">$15</span></h3>
+                    <p>Porcion de salsa de Chipotle.</p>
                     <label>Cantidad</label>
                     <input type="number" class="qty" value="1" min="1">
                     <button class="add-btn">Agregar al Pedido</button>
@@ -1452,162 +1842,136 @@
     </button>
 
     <script>
-        let orderItems = [];
+        document.addEventListener("DOMContentLoaded", function () {
 
-        // Agregar al pedido
-        document.querySelectorAll('.add-btn').forEach(btn => {
-            btn.addEventListener('click', function () {
-                const card = this.closest('.dish-card');
-                const name = card.dataset.name;
-                const price = parseInt(card.dataset.price);
-                const qty = parseInt(card.querySelector('.qty').value);
+            let orderItems = [];
 
-                const salsa1Select = card.querySelector('.salsa1');
-                const salsa2Select = card.querySelector('.salsa2');
+            // Agregar al pedido
+            document.querySelectorAll('.add-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const card = this.closest('.dish-card');
+                    const name = card.dataset.name;
+                    const price = parseInt(card.dataset.price);
+                    const qty = parseInt(card.querySelector('.qty').value);
 
-                const rellenoSelect = card.querySelector('.relleno');
+                    const salsa1Select = card.querySelector('.salsa1');
+                    const salsa2Select = card.querySelector('.salsa2');
+                    const rellenoSelect = card.querySelector('.relleno');
 
-                let salsa1 = '';
-                let salsa2 = '';
-                let relleno = '';
+                    let salsa1 = '';
+                    let salsa2 = '';
+                    let relleno = '';
 
-                if (salsa1Select) {
-                    salsa1 = salsa1Select.value;
-                    if (!salsa1 && salsa1Select.options.length > 1) {
-                        alert('Por favor selecciona la Salsa 1');
-                        return;
+                    if (salsa1Select) {
+                        salsa1 = salsa1Select.value;
+                        if (!salsa1 && salsa1Select.options.length > 1) {
+                            alert('Por favor selecciona la Salsa 1');
+                            return;
+                        }
                     }
-                }
 
-                if (salsa2Select) {
-                    salsa2 = salsa2Select.value;
-                    if (!salsa2 && salsa2Select.options.length > 1) {
-                        alert('Por favor selecciona la Salsa 2');
-                        return;
+                    if (salsa2Select) {
+                        salsa2 = salsa2Select.value;
+                        if (!salsa2 && salsa2Select.options.length > 1) {
+                            alert('Por favor selecciona la Salsa 2');
+                            return;
+                        }
                     }
-                }
 
-                if (rellenoSelect) {
-                    relleno = rellenoSelect.value;
-                    if (!relleno && rellenoSelect.options.length > 1) {
-                        alert('Por favor selecciona el Relleno');
-                        return;
+                    if (rellenoSelect) {
+                        relleno = rellenoSelect.value;
+                        if (!relleno && rellenoSelect.options.length > 1) {
+                            alert('Por favor selecciona el Relleno');
+                            return;
+                        }
                     }
-                }
 
-                const item = {
-                    name,
-                    price,
-                    qty,
-                    salsa1,
-                    salsa2,
-                    relleno,
-                    subtotal: price * qty
-                };
+                    const item = {
+                        name,
+                        price,
+                        qty,
+                        salsa1,
+                        salsa2,
+                        relleno,
+                        subtotal: price * qty
+                    };
 
-                orderItems.push(item);
-                updateOrderSummary();
+                    orderItems.push(item);
+                    updateOrderSummary();
 
-                // Animación de confirmación
-                this.textContent = '✓ Agregado';
-                setTimeout(() => {
-                    this.textContent = 'Agregar al Pedido';
-                }, 1500);
+                    this.textContent = '✓ Agregado';
+                    setTimeout(() => {
+                        this.textContent = 'Agregar al Pedido';
+                    }, 1500);
+                });
             });
-        });
 
-        function updateOrderSummary() {
-            const orderItemsDiv = document.getElementById('orderItems');
-            const totalDiv = document.getElementById('orderTotal');
-            const totalAmountSpan = document.getElementById('totalAmount');
-            const cartBadge = document.getElementById('cartBadge');
+            function updateOrderSummary() {
+                const orderItemsDiv = document.getElementById('orderItems');
+                const totalDiv = document.getElementById('orderTotal');
+                const totalAmountSpan = document.getElementById('totalAmount');
+                const cartBadge = document.getElementById('cartBadge');
 
-            if (orderItems.length === 0) {
-                orderItemsDiv.innerHTML = '<p class="empty-order">No hay productos agregados</p>';
-                totalDiv.style.display = 'none';
-                cartBadge.style.display = 'none';
-                return;
-            }
+                if (orderItems.length === 0) {
+                    orderItemsDiv.innerHTML = '<p class="empty-order">No hay productos agregados</p>';
+                    totalDiv.style.display = 'none';
+                    cartBadge.style.display = 'none';
+                    return;
+                }
 
-            let html = '';
-            let total = 0;
+                let html = '';
+                let total = 0;
 
-            orderItems.forEach((item, index) => {
-                html += `
-                    <div class="order-item">
-                        <div>
-                            <strong>${item.name}</strong> x${item.qty}
-                            ${item.salsa1 ? `<br><small>Salsa 1: ${item.salsa1}</small>` : ''}
-                            ${item.salsa2 ? `<br><small>Salsa 2: ${item.salsa2}</small>` : ''}
-                            ${item.relleno ? `<br><small>Relleno: ${item.relleno}</small>` : ''}
-                        </div>
-                        <div>$${item.subtotal}</div>
+                orderItems.forEach((item, index) => {
+                    html += `
+                <div class="order-item">
+                    <div>
+                        <strong>${item.name}</strong> x${item.qty}
+                        ${item.salsa1 ? `<br><small>Salsa 1: ${item.salsa1}</small>` : ''}
+                        ${item.salsa2 ? `<br><small>Salsa 2: ${item.salsa2}</small>` : ''}
+                        ${item.relleno ? `<br><small>Relleno: ${item.relleno}</small>` : ''}
                     </div>
-                `;
-                total += item.subtotal;
-            });
+                    <div>$${item.subtotal}</div>
+                </div>
+            `;
+                    total += item.subtotal;
+                });
 
-            orderItemsDiv.innerHTML = html;
-            totalAmountSpan.textContent = '$' + total;
-            totalDiv.style.display = 'flex';
+                orderItemsDiv.innerHTML = html;
+                totalAmountSpan.textContent = '$' + total;
+                totalDiv.style.display = 'flex';
 
-            cartBadge.textContent = orderItems.length;
-            cartBadge.style.display = 'flex';
-        }
-
-        // FAB - Scroll al formulario
-        document.getElementById('fabButton').addEventListener('click', function () {
-            document.getElementById('formulario').scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        });
-
-        // Envío del formulario
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            if (orderItems.length === 0) {
-                alert('Por favor agrega productos a tu pedido primero');
-                return;
+                cartBadge.textContent = orderItems.length;
+                cartBadge.style.display = 'flex';
             }
 
-            const nombre = document.getElementById('nombre').value;
-            const telefono = document.getElementById('telefono').value;
-            const direccion = document.getElementById('direccion').value;
-            const comentarios = document.getElementById('comentarios').value;
+            // Toggle precio
+            document.querySelectorAll('.dish-card').forEach(card => {
+                const toggle = card.querySelector('.toggle-type');
 
-            let pedidoTexto = `*NUEVO PEDIDO*\n\n`;
-            pedidoTexto += `👤 Cliente: ${nombre}\n`;
-            pedidoTexto += `📞 Teléfono: ${telefono}\n`;
-            pedidoTexto += `📍 Dirección: ${direccion}\n\n`;
-            pedidoTexto += `*PRODUCTOS:*\n`;
+                if (!toggle) return;
 
-            let total = 0;
-            orderItems.forEach(item => {
-                pedidoTexto += `\n• ${item.name} x${item.qty} - $${item.subtotal}\n`;
-                if (item.salsa1) pedidoTexto += `  Salsa 1: ${item.salsa1}\n`;
-                if (item.salsa2) pedidoTexto += `  Salsa 2: ${item.salsa2}\n`;
-                if (item.relleno) pedidoTexto += `  Relleno: ${item.relleno}\n`;
-                total += item.subtotal;
+                toggle.addEventListener('change', () => {
+                    const priceOrden = parseInt(card.dataset.priceOrden);
+                    const pricePorcion = parseInt(card.dataset.pricePorcion);
+
+                    if (toggle.checked) {
+                        card.dataset.price = priceOrden;
+                    } else {
+                        card.dataset.price = pricePorcion;
+                    }
+
+                    console.log("Nuevo precio:", card.dataset.price);
+                });
+
+                card.dataset.price = card.dataset.pricePorcion;
             });
 
-            pedidoTexto += `\n*TOTAL: $${total}*`;
+            document.getElementById('fabButton').addEventListener('click', function () { document.getElementById('formulario').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
 
-            if (comentarios) {
-                pedidoTexto += `\n\n💬 Comentarios: ${comentarios}`;
-            }
-
-            alert(`¡Gracias por tu pedido, ${nombre}!\n\nTotal: $${total}\n\nEn un momento nos pondremos en contacto contigo.`);
-
-            console.log(pedidoTexto);
-
-            // Limpiar
-            this.reset();
-            orderItems = [];
-            updateOrderSummary();
         });
     </script>
+
 </body>
 
 </html>

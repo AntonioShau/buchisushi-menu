@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Ubicación de Pedido</title>
+  <title>Mapa con Híbrido</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
   <style>
     #map { height: 100vh; width: 100%; }
@@ -14,47 +14,65 @@
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-  let map;
-  let marker;
+  let map = L.map('map').setView([0,0], 15);
 
-  // Inicializar mapa
-  map = L.map('map').setView([0, 0], 15);
+  // Pane para etiquetas
+  map.createPane('labels');
+  map.getPane('labels').style.zIndex = 650;
+  map.getPane('labels').style.pointerEvents = 'none';
 
-  // Capa de OpenStreetMap
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
+  // Base mapa normal
+  const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19
   }).addTo(map);
 
-  // 1. Obtener ubicación del usuario
+  // Satélite ESRI
+  const esriSat = L.tileLayer(
+    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    { maxZoom: 19 }
+  );
+
+  // Etiquetas (calles)
+  const esriLabels = L.tileLayer(
+    'https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+    {
+      maxZoom: 19,
+      pane: 'labels'
+    }
+  );
+
+  // Híbrido: satélite + etiquetas
+  const hibrido = L.layerGroup([esriSat, esriLabels]);
+
+  // selector de capas
+  L.control.layers(
+    {
+      "Mapa": osm,
+      "Satélite": esriSat,
+      "Híbrido (Satélite + Calles)": hibrido
+    },
+    {}
+  ).addTo(map);
+
+  let marker;
+
+  // Obtener ubicación
   navigator.geolocation.getCurrentPosition((pos) => {
     const lat = pos.coords.latitude;
     const lng = pos.coords.longitude;
 
     map.setView([lat, lng], 17);
-
     marker = L.marker([lat, lng], { draggable: true }).addTo(map);
-
-    // Para cuando arrastra el pin
-    marker.on("dragend", function (e) {
-      const { lat, lng } = e.target.getLatLng();
-      console.log("Nueva ubicación arrastrada:", lat, lng);
-    });
-
-    console.log("Ubicación inicial:", lat, lng);
   });
 
-  // 2. Clic en el mapa para seleccionar otra ubicación
-  map.on('click', function (e) {
-    const lat = e.latlng.lat;
-    const lng = e.latlng.lng;
+  // Clic en mapa
+  map.on('click', function(e){
+    const {lat, lng} = e.latlng;
 
-    if (!marker) {
+    if (!marker)
       marker = L.marker([lat, lng], { draggable: true }).addTo(map);
-    } else {
+    else
       marker.setLatLng([lat, lng]);
-    }
-
-    console.log("Ubicación seleccionada manualmente:", lat, lng);
   });
 </script>
 
