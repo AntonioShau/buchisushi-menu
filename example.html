@@ -2228,6 +2228,59 @@
                 cartBadge.style.display = 'flex';
             }
 
+            // Enviar el pedido por WhatsApp
+            document.getElementById('contactForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                if (orderItems.length === 0) {
+                    alert('Agrega al menos un producto antes de realizar el pedido.');
+                    return;
+                }
+
+                // IMPORTANTE: reemplaza este valor por el WhatsApp de Buchi Sushi.
+                // Formato internacional: código de país + número, solo dígitos.
+                // México: 52 + número de 10 dígitos. Ejemplo ficticio: 521234567890.
+                const whatsappNumber = '528662133465';
+
+                const nombre = document.getElementById('nombre').value.trim();
+                const telefono = document.getElementById('telefono').value.trim();
+                const direccion = document.getElementById('direccion').value.trim();
+                const comentarios = document.getElementById('comentarios').value.trim();
+
+                let total = 0;
+                const lineasPedido = orderItems.map((item, index) => {
+                    total += item.subtotal;
+                    let linea = `${index + 1}. ${item.name} x${item.qty} — $${item.subtotal}`;
+                    if (item.salsa1) linea += `\n   Salsa 1: ${item.salsa1}`;
+                    if (item.salsa2) linea += `\n   Salsa 2: ${item.salsa2}`;
+                    if (item.relleno) linea += `\n   Relleno: ${item.relleno}`;
+                    return linea;
+                });
+
+                const mensaje = [
+                    '*¡Hola, Buchi Sushi! Quiero realizar el siguiente pedido:*',
+                    '',
+                    '*PEDIDO*',
+                    ...lineasPedido,
+                    '',
+                    `*TOTAL: $${total} MXN*`,
+                    '',
+                    '*DATOS DEL CLIENTE*',
+                    `Nombre: ${nombre}`,
+                    `Teléfono: ${telefono}`,
+                    `Dirección de entrega: ${direccion}`,
+                    comentarios ? `Comentarios: ${comentarios}` : ''
+                ].filter(Boolean).join('\n');
+
+                if (whatsappNumber.includes('X')) {
+                    alert('Antes de usar el botón, configura el número de WhatsApp de Buchi Sushi en la variable whatsappNumber del código.');
+                    return;
+                }
+
+                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensaje)}`;
+                window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+            });
+
             // Toggle precio
             document.querySelectorAll('.dish-card').forEach(card => {
                 const toggle = card.querySelector('.toggle-type');
