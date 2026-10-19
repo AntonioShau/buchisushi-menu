@@ -2250,7 +2250,8 @@
                 let total = 0;
                 const lineasPedido = orderItems.map((item, index) => {
                     total += item.subtotal;
-                    let linea = `${index + 1}. ${item.name} x${item.qty} — $${item.subtotal}`;
+                    const cantidad = `${item.qty} ${item.qty === 1 ? 'unidad' : 'unidades'} de`;
+                    let linea = `${index + 1}. ${cantidad} ${item.name} — $${item.subtotal}`;
                     if (item.salsa1) linea += `\n   Salsa 1: ${item.salsa1}`;
                     if (item.salsa2) linea += `\n   Salsa 2: ${item.salsa2}`;
                     if (item.relleno) linea += `\n   Relleno: ${item.relleno}`;
